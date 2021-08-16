@@ -18,5 +18,6 @@ import { MongooseModule } from '@nestjs/mongoose';
   ],
   controllers: [PassengerController],
   providers: [PassengerService],
+  exports: [PassengerService],
 })
 export class PassengerModule {}
