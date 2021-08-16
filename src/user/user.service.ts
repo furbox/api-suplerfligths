@@ -19,11 +19,17 @@ export class UserService {
     const salt = await bcrypt.genSalt(10);
     return await bcrypt.hash(password, salt);
   }
+  async creckPassword(password: string, passwordDb: string): Promise<boolean> {
+    return await bcrypt.compare(password, passwordDb);
+  }
   async findAll(): Promise<IUser[]> {
     return await this.model.find();
   }
   async findOne(id: string): Promise<IUser> {
     return await this.model.findById(id);
+  }
+  async findByUsername(username: string): Promise<IUser> {
+    return await this.model.findOne({ username });
   }
   async update(id: string, userDTO: UserDTO): Promise<IUser> {
     const hash = await this.hashPassword(userDTO.password);
